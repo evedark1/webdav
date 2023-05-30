@@ -26,6 +26,7 @@ type Config struct {
 	NoSniff   bool
 	Cors      CorsCfg
 	Users     map[string]*User
+	Log       string
 	LogFormat string
 }
 

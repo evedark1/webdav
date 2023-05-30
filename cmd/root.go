@@ -28,6 +28,7 @@ func init() {
 	flags.StringP("address", "a", "0.0.0.0", "address to listen to")
 	flags.StringP("port", "p", "0", "port to listen to")
 	flags.StringP("prefix", "P", "/", "URL path prefix")
+	flags.String("log", "stderr", "logging output")
 	flags.String("log_format", "console", "logging format")
 }
 
@@ -73,6 +74,10 @@ set WD_CERT.`,
 		loggerConfig.DisableCaller = true
 		if cfg.Debug {
 			loggerConfig.Level = zap.NewAtomicLevelAt(zap.DebugLevel)
+		}
+		if cfg.Log != "stderr" {
+			loggerConfig.OutputPaths = []string{cfg.Log}
+			loggerConfig.ErrorOutputPaths = []string{cfg.Log}
 		}
 		loggerConfig.EncoderConfig.EncodeTime = zapcore.ISO8601TimeEncoder
 		loggerConfig.Encoding = cfg.LogFormat

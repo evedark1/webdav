@@ -198,6 +198,7 @@ func readConfig(flags *pflag.FlagSet) *lib.Config {
 			Credentials: false,
 		},
 		Users:     map[string]*lib.User{},
+		Log:       getOpt(flags, "log"),
 		LogFormat: getOpt(flags, "log_format"),
 	}
 
